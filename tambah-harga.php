@@ -33,11 +33,11 @@ if (isset($_POST['tambah'])) {
 // mengambil id pasien dari url
 $id_rm = (int)$_GET['id_rm'];
 
-$data = mysqli_query($db, "SELECT * FROM rekammedis
-INNER JOIN pasien ON rekammedis.id_pasien = pasien.id_pasien
-INNER JOIN dokter ON rekammedis.id_dokter = dokter.id_dokter
-INNER JOIN pelayanan ON rekammedis.id_pelayanan = pelayanan.id_pelayanan WHERE id_rm = '" . $_GET["id_rm"] . "'");
+// $data = mysqli_query($db, "SELECT * FROM rekammedis join pelayanan on pelayanan.id_pelayanan = rekammedis.id_pelayanan WHERE id_rm = '" . $_GET["id_rm"] . "'");
+// $data = select("SELECT * FROM rekammedis join pelayanan on pelayanan.id_pelayanan = rekammedis.id_pelayanan WHERE id_rm = '" . $_GET["id_rm"] . "'")[0];
 
+$sql_rm = mysqli_query($db,"SELECT * FROM rekammedis join pelayanan on pelayanan.id_pelayanan = rekammedis.id_pelayanan WHERE id_rm = '" . $_GET["id_rm"] . "'") or die (mysqli_error($db));
+$data = mysqli_fetch_array($sql_rm);
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -51,7 +51,7 @@ INNER JOIN pelayanan ON rekammedis.id_pelayanan = pelayanan.id_pelayanan WHERE i
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="rekammedis.php">Data Harga</a></li>
+            <li class="breadcrumb-item"><a href="rekammedis.php">Rekammedis</a></li>
             <li class="breadcrumb-item active">Tambah Harga</li>
           </ol>
         </div><!-- /.col -->
@@ -64,23 +64,22 @@ INNER JOIN pelayanan ON rekammedis.id_pelayanan = pelayanan.id_pelayanan WHERE i
   <section class="content">
     <div class="container-fluid">
 
-      <?php while ($rekammedis = mysqli_fetch_array($data)) { ?>
         <form action="" method="post">
           <div class="mb-3">
             <label for="id_rm">Nomor Rekam Medis</label>
-            <input type="text" name="id_rm" class="form-control" required="required" value="<?= $rekammedis['id_rm'] ?>" readonly>
+            <input type="text" name="id_rm" class="form-control" required="required" value="<?= $data['id_rm'] ?>" readonly>
           </div>
           <div class="mb-3">
             <label for="nama_pasien">Nama Pasien</label>
-            <input type="text" name="nama_pasien" class="form-control" placeholder="Masukkan nama pasien" value="<?= $rekammedis['nama_pasien'] ?>" readonly>
+            <input type="text" name="nama_pasien" class="form-control" placeholder="Masukkan nama pasien" value="<?= $data['nama_pasien'] ?>" readonly>
           </div>
           <div class="mb-3">
             <label for="jenis_pelayanan">Jenis Pelayanan</label>
-            <input type="text" name="jenis_pelayanan" class="form-control" value="<?= $rekammedis['jenis_pelayanan'] ?>" readonly>
+            <input type="text" name="jenis_pelayanan" class="form-control" value="<?= $data['jenis_pelayanan'] ?>" readonly>
           </div>
           <div class="mb-3">
             <label for="biaya_pokok">Biaya Pokok</label>
-            <input type="number" name="biaya_pokok" step="any" min="0" value="<?= $rekammedis['biaya_pokok'] ?>" id="biaya_pokok" class="form-control" placeholder="Masukkan biaya pokok" readonly>
+            <input type="number" name="biaya_pokok" step="any" min="0" value="<?= $data['biaya_pokok'] ?>" id="biaya_pokok" class="form-control" placeholder="Masukkan biaya pokok" readonly>
           </div>
           <div class="mb-3">
             <label for="biaya_layanan">Biaya Layanan</label>
@@ -92,8 +91,7 @@ INNER JOIN pelayanan ON rekammedis.id_pelayanan = pelayanan.id_pelayanan WHERE i
           </div>
           <button type="submit" name="tambah" class="btn btn-primary" style="float: right;"><i class="fa fa-plus"></i> Tambah</button>
         </form>
-      <?php } ?>
-      
+
     </div>
   </section>
   <!-- /.content -->

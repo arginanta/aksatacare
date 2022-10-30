@@ -25,7 +25,7 @@ if (isset($_POST['tambah'])) {
   } else {
     echo "<script> 
               alert('Data Rekam Medis Gagal Ditambahkan');
-              document.location.href = 'rekammedis.php';
+              document.location.href = 'index.php';
             </script>";
   }
 }
@@ -80,15 +80,7 @@ $pasien = select("SELECT * FROM pasien WHERE id_pasien = '" . $_GET["id_pasien"]
 
         <div class="mb-3">
           <label for="pasien">Pasien</label>
-          <select name="pasien" id="pasien" class="form-control" required>
-            <option value="">- Pilih </option>
-            <?php
-            $sql_pasien = select("SELECT * FROM pasien");
-            foreach ($sql_pasien as $data_pasien) :
-              echo '<option value="' . $data_pasien['id_pasien'] . '">' . $data_pasien['nama_pasien'] . '</option>';
-            ?>
-            <?php endforeach; ?>
-          </select>
+          <input type="text" name="nama_pasien" class="form-control" required="required" value="<?= $pasien['nama_pasien'];  ?>" readonly>
         </div>
 
         <div class="mb-3">

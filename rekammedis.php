@@ -15,11 +15,6 @@ $title = 'Rekam Medis';
 
 include 'layout/header.php';
 
-$laporan_rekammedis = select("SELECT * FROM rekammedis
-INNER JOIN pasien ON rekammedis.id_pasien = pasien.id_pasien
-INNER JOIN dokter ON rekammedis.id_dokter = dokter.id_dokter
-INNER JOIN pelayanan ON rekammedis.id_pelayanan = pelayanan.id_pelayanan");
-
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -59,7 +54,7 @@ INNER JOIN pelayanan ON rekammedis.id_pelayanan = pelayanan.id_pelayanan");
                   <tr>
                     <th>No. Rekammedis</th>
                     <th>Nama Pasien</th>
-                    <th>Nama Dokter</th>
+                    <!-- <th>Nama Dokter</th> -->
                     <th>Keluhan</th>
                     <th>Terapi</th>
                     <th>Pelayanan</th>
@@ -70,18 +65,19 @@ INNER JOIN pelayanan ON rekammedis.id_pelayanan = pelayanan.id_pelayanan");
 
                 <tbody>
                   <?php
+                  // INNER JOIN pasien ON rekammedis.id_pasien = pasien.id_pasien
                   $query = "SELECT * FROM rekammedis
-                            INNER JOIN pasien ON rekammedis.id_pasien = pasien.id_pasien
-                            INNER JOIN dokter ON rekammedis.id_dokter = dokter.id_dokter
                             INNER JOIN pelayanan ON rekammedis.id_pelayanan = pelayanan.id_pelayanan
                             ";
+                            // INNER JOIN dokter ON rekammedis.id_dokter = dokter.id_dokter
 
+                  // $query = "SELECT * FROM rekammedis JOIN pelayanan ON rekammedis.id_pelayanan = pelayanan.id_pelayanan";
                   $sql_rm = mysqli_query($db, $query) or die(mysqli_error($con));
                   while ($rm = mysqli_fetch_array($sql_rm)) { ?>
                     <tr>
                       <td><?= $rm["id_rm"]; ?></td>
                       <td><?= $rm["nama_pasien"]; ?></td>
-                      <td><?= $rm["nama_dokter"]; ?></td>
+                      <!-- <td><?= $rm["id_dokter"]; ?></td> -->
                       <td><?= $rm["keluhan"]; ?></td>
                       <td><?= $rm["terapi"]; ?></td>
                       <td><?= $rm["jenis_pelayanan"]; ?></td>

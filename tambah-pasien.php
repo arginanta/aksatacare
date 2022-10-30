@@ -78,7 +78,7 @@ $nounik = "PSN-" . $waktu . -$jmlh;
         </div>
         <div class="mb-3">
           <label for="nik">NIK</label>
-          <input type="number" placeholder="Masukkan NIK " name="nik" class="form-control" required>
+          <input type="number" placeholder="Masukkan NIK " name="nik" class="form-control">
         </div>
         <div class="mb-3">
           <label for="usia">Usia</label>
