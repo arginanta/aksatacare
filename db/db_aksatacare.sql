@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Okt 2022 pada 18.25
+-- Waktu pembuatan: 30 Okt 2022 pada 23.23
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.29
 
@@ -126,8 +126,9 @@ INSERT INTO `pelayanan` (`id_pelayanan`, `jenis_pelayanan`, `biaya_pokok`) VALUE
 --
 
 CREATE TABLE `rekammedis` (
+  `id_rekammedis` int(11) NOT NULL,
   `id_rm` varchar(50) NOT NULL,
-  `id_pasien` varchar(50) NOT NULL,
+  `nama_pasien` varchar(50) NOT NULL,
   `keluhan` text NOT NULL,
   `id_dokter` varchar(50) NOT NULL,
   `terapi` text NOT NULL,
@@ -155,8 +156,7 @@ ALTER TABLE `dokter`
 -- Indeks untuk tabel `finance`
 --
 ALTER TABLE `finance`
-  ADD PRIMARY KEY (`id_finance`),
-  ADD KEY `fk_finance_rekammedis` (`id_rm`);
+  ADD PRIMARY KEY (`id_finance`);
 
 --
 -- Indeks untuk tabel `pasien`
@@ -174,10 +174,7 @@ ALTER TABLE `pelayanan`
 -- Indeks untuk tabel `rekammedis`
 --
 ALTER TABLE `rekammedis`
-  ADD PRIMARY KEY (`id_rm`),
-  ADD KEY `fk_rekammdesi_pasien` (`id_pasien`),
-  ADD KEY `fk_rekammedis_dokter` (`id_dokter`),
-  ADD KEY `fk_rekammedis_pelayanan` (`id_pelayanan`);
+  ADD PRIMARY KEY (`id_rekammedis`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -193,7 +190,7 @@ ALTER TABLE `akun`
 -- AUTO_INCREMENT untuk tabel `finance`
 --
 ALTER TABLE `finance`
-  MODIFY `id_finance` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_finance` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `pelayanan`
@@ -202,22 +199,10 @@ ALTER TABLE `pelayanan`
   MODIFY `id_pelayanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
---
-
---
--- Ketidakleluasaan untuk tabel `finance`
---
-ALTER TABLE `finance`
-  ADD CONSTRAINT `fk_finance_rekammedis` FOREIGN KEY (`id_rm`) REFERENCES `rekammedis` (`id_rm`);
-
---
--- Ketidakleluasaan untuk tabel `rekammedis`
+-- AUTO_INCREMENT untuk tabel `rekammedis`
 --
 ALTER TABLE `rekammedis`
-  ADD CONSTRAINT `fk_rekammdesi_pasien` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id_pasien`),
-  ADD CONSTRAINT `fk_rekammedis_dokter` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`),
-  ADD CONSTRAINT `fk_rekammedis_pelayanan` FOREIGN KEY (`id_pelayanan`) REFERENCES `pelayanan` (`id_pelayanan`);
+  MODIFY `id_rekammedis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
