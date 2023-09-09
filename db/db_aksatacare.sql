@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Okt 2022 pada 23.23
+-- Waktu pembuatan: 09 Sep 2023 pada 05.20
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.29
 
@@ -41,7 +41,7 @@ CREATE TABLE `akun` (
 --
 
 INSERT INTO `akun` (`id_akun`, `nama`, `username`, `email`, `password`, `level`) VALUES
-(2, 'Admin', 'admin', 'admin@gmail.com', '$2y$10$s8V.tILGj3ux7oCg/CexHui9TuUxyn91RJcjeEr3LOP/VU.ROVYyW', '1');
+(1, 'Admin', 'admin', 'arginanta301@gmail.com', '$2y$10$1lqgy85xeCS27OnENZkZ1eN5UfP61T0y75K8IdrzhfcwOp2W/GOq2', '1');
 
 -- --------------------------------------------------------
 
@@ -56,6 +56,13 @@ CREATE TABLE `dokter` (
   `alamat` text NOT NULL,
   `no_telp` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `dokter`
+--
+
+INSERT INTO `dokter` (`id_dokter`, `nama_dokter`, `spesialis`, `alamat`, `no_telp`) VALUES
+('DOKTER-311022-1', 'fghjk', 'fcgvhbnjkm', 'cfvgbhnjmk\r\n', '5678');
 
 -- --------------------------------------------------------
 
@@ -89,6 +96,14 @@ CREATE TABLE `pasien` (
   `alamat` text NOT NULL,
   `no_telp` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `pasien`
+--
+
+INSERT INTO `pasien` (`id_pasien`, `nama_pasien`, `nik`, `usia`, `jenis_kelamin`, `alamat`, `no_telp`) VALUES
+('PSN-311022-1', 'b jnkm,', '567890', 45, 'Laki-Laki', '<p>cfvgbhnjm</p>\r\n', '45678'),
+('PSN-311022-2', 'sdow', '56789', 21, 'Perempuan', '<p>jmk,</p>\r\n', '12313');
 
 -- --------------------------------------------------------
 
@@ -135,6 +150,13 @@ CREATE TABLE `rekammedis` (
   `tgl_periksa` date NOT NULL,
   `id_pelayanan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `rekammedis`
+--
+
+INSERT INTO `rekammedis` (`id_rekammedis`, `id_rm`, `nama_pasien`, `keluhan`, `id_dokter`, `terapi`, `tgl_periksa`, `id_pelayanan`) VALUES
+(4, 'PSN-311022-2', 'sdow', 'vbnm', 'DOKTER-311022-1', 'cvbn', '2022-10-31', 16);
 
 --
 -- Indexes for dumped tables
@@ -202,7 +224,7 @@ ALTER TABLE `pelayanan`
 -- AUTO_INCREMENT untuk tabel `rekammedis`
 --
 ALTER TABLE `rekammedis`
-  MODIFY `id_rekammedis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_rekammedis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
